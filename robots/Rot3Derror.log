@@ -1,0 +1,145 @@
+kshaurya@kshaurya-laptop:~/openrave/robots$ openrave.py --database inversekinematics --robot=er4u.xml --level=verbose --iktype=rotation3d
+[environment-core.h:43] setting openrave cache directory to /home/kshaurya/.openrave
+[environment-core.h:114] data dir: /home/kshaurya/openrave
+[environment-core.h:114] data dir: /usr/share/openrave-0.6
+[odecollision.h:119] ode will be slow in multi-threaded environments
+[environment-core.h:176] using ode collision checker
+[environment-core.h:770] setting ode collision checker
+[odespace.h:232] init ode collision environment
+[xmlreaders.cpp:296] unknown field render
+[xmlreaders.cpp:296] unknown field data
+[xmlreaders.cpp:296] unknown field render
+[xmlreaders.cpp:296] unknown field data
+[xmlreaders.cpp:296] unknown field render
+[xmlreaders.cpp:296] unknown field data
+[xmlreaders.cpp:296] unknown field render
+[xmlreaders.cpp:296] unknown field data
+[xmlreaders.cpp:296] unknown field render
+[xmlreaders.cpp:296] unknown field data
+[xmlreaders.cpp:296] unknown field render
+[xmlreaders.cpp:296] unknown field data
+[xmlreaders.cpp:296] unknown field render
+[xmlreaders.cpp:2422] : COM = (0.000000,0.085458,0.224875)
+[kinbody.cpp:3998] swapping link order of joint base(0)
+[kinbody.cpp:4310] _ComputeInternalInformation er4u in 0.000162s
+[robot.cpp:2474] no default controller set on robot er4u
+openravepy._openravepy_0_6.databases.inversekinematics: Generating inverse kinematics for manip gripper: Rotation3D [0, 1, 2] (this might take up to 10 min)
+openravepy._openravepy_0_6.databases.inversekinematics: creating ik file /home/kshaurya/.openrave/kinematics.a15d5c8f77cca16b64487972de132f6b/ikfast55.Rotation3D.0_1_2_f4_3.cpp
+ikfast: moved translation [0, 0, 0] to right end
+ikfast: moved translation [0, 0, 261/2000] to left end
+ikfast: moved translation on intersecting axis [0, 0, 0] to left
+ikfast: [[1, 0, 0, 0],[0, 0, 1, 289/2000],[0, -1, 0, 0]]
+ikfast: [[cos(j0), -sin(j0), 0, 0],[sin(j0), cos(j0), 0, 0],[0, 0, 1, 0]]
+ikfast: [[0, 0, 1, 0],[1, 0, 0, -19/1000],[0, 1, 0, 0]]
+ikfast: [[cos(j1), -sin(j1), 0, 0],[sin(j1), cos(j1), 0, 0],[0, 0, 1, 0]]
+ikfast: [[1, 0, 0, -223/1000],[0, 1, 0, 0],[0, 0, 1, 0]]
+ikfast: [[cos(j2), -sin(j2), 0, 0],[sin(j2), cos(j2), 0, 0],[0, 0, 1, 0]]
+ikfast: [[1, 0, 0, -443/2000],[0, 1, 0, 0],[0, 0, 1, 0]]
+ikfast: [[cos(j3), -sin(j3), 0, 0],[sin(j3), cos(j3), 0, 0],[0, 0, 1, 0]]
+ikfast: [[0, 0, -1, 0],[0, 1, 0, 0],[1, 0, 0, 0]]
+ikfast: [[cos(j4), -sin(j4), 0, 0],[sin(j4), cos(j4), 0, 0],[0, 0, 1, 0]]
+ikfast: [[1, 0, 0, 0],[0, 1, 0, 0],[0, 0, 1, 0]]
+ikfast: ikfast rotation3d: [j0, j1, j2]
+ikfast: [j3, j4] [j0, j1, j2]
+ikfast: j0 solution: equations used for atan2: [r02*cos(j0) + r12*sin(j0), sj4 + r01*cos(j0) + r11*sin(j0), -cj4 + r00*cos(j0) + r10*sin(j0)]
+ikfast: [j3, j4, j0] [j1, j2]
+ikfast: 'solvePairVariablesHalfAngle: solve dialytically with 12 equations'
+ikfast: solving separated equations with linear terms
+ikfast: simplifying final equation to 279
+ikfast: solving separated equations with linear terms
+ikfast: simplifying final equation to 599
+ikfast: solving separated equations with linear terms
+ikfast: simplifying final equation to 599
+ikfast: solving separated equations with linear terms
+ikfast: simplifying final equation to 651
+ikfast: solving separated equations with linear terms
+ikfast: simplifying final equation to 651
+ikfast: solving separated equations with linear terms
+ikfast: simplifying final equation to 651
+ikfast: solving separated equations with linear terms
+ikfast: simplifying final equation to 651
+ikfast: solving separated equations with linear terms
+ikfast: simplifying final equation to 599
+ikfast: solving separated equations with linear terms
+ikfast: simplifying final equation to 599
+ikfast: solving separated equations with linear terms
+ikfast: simplifying final equation to 647
+^C[environment-core.h:200] Environment destructor
+[environment-core.h:208] destroy module
+[environment-core.h:221] resetting raveviewer
+[odespace.h:239] destroying ode collision environment
+[environment-core.h:270] Environment destroyed
+[environment-core.h:193] environment is already destroyed
+Traceback (most recent call last):
+  File "/usr/bin/openrave.py", line 126, in <module>
+    database.run(args=args)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/databases/inversekinematics.py", line 890, in run
+    InverseKinematicsModel.RunFromParser(*args,**kwargs)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/databases/inversekinematics.py", line 866, in RunFromParser
+    model = DatabaseGenerator.RunFromParser(Model=Model,parser=parser,robotatts=robotatts,args=args,**kwargs)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/databases/__init__.py", line 219, in RunFromParser
+    model.autogenerate(options=options)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/databases/inversekinematics.py", line 493, in autogenerate
+    self.generate(iktype=iktype,freejoints=freejoints,precision=precision,forceikbuild=forceikbuild,outputlang=outputlang,ipython=ipython)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/databases/inversekinematics.py", line 684, in generate
+    chaintree = solver.generateIkSolver(baselink=baselink,eelink=eelink,freeindices=self.freeindices,solvefn=solvefn)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/ikfast.py", line 1662, in generateIkSolver
+    chaintree = solvefn(self, LinksRaw, jointvars, isolvejointvars)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/databases/inversekinematics.py", line 520, in solveFullIK_Rotation3D
+    return self.ikfast.IKFastSolver.solveFullIK_Rotation3D(*args,**kwargs)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/ikfast.py", line 1805, in solveFullIK_Rotation3D
+    tree = self.solveAllEquations(AllEquations,curvars=solvejointvars[:],othersolvedvars=self.freejointvars,solsubs = self.freevarsubs[:],endbranchtree=endbranchtree)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/ikfast.py", line 3925, in solveAllEquations
+    return self.addSolution(solutions,AllEquations,curvars,othersolvedvars,solsubs,endbranchtree,currentcases=currentcases)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/ikfast.py", line 4148, in addSolution
+    nextsolutions[var] = self.solveAllEquations(AllEquations,curvars=newvars,othersolvedvars=othersolvedvars+[var],solsubs=solsubs+self.Variable(var).subs,endbranchtree=endbranchtree,currentcases=currentcases)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/ikfast.py", line 3943, in solveAllEquations
+    rawsolutions=self.solvePairVariables(raweqns,var0,var1,othersolvedvars,unknownvars=curvars+unknownvars)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/ikfast.py", line 5284, in solvePairVariables
+    totaleq = simplify(totaleq)
+  File "/usr/lib/pymodules/python2.6/sympy/simplify/simplify.py", line 1313, in simplify
+    if expr.could_extract_minus_sign():
+  File "/usr/lib/pymodules/python2.6/sympy/core/basic.py", line 2056, in could_extract_minus_sign
+    negative_args = len([False for arg in self.args if arg.could_extract_minus_sign()])
+  File "/usr/lib/pymodules/python2.6/sympy/core/basic.py", line 2048, in could_extract_minus_sign
+    self_has_minus = (self.extract_multiplicatively(-1) != None)
+  File "/usr/lib/pymodules/python2.6/sympy/core/basic.py", line 1934, in extract_multiplicatively
+    tmp = C.Mul(*newargs).extract_multiplicatively(c)
+  File "/usr/lib/pymodules/python2.6/sympy/core/basic.py", line 1934, in extract_multiplicatively
+    tmp = C.Mul(*newargs).extract_multiplicatively(c)
+  File "/usr/lib/pymodules/python2.6/sympy/core/basic.py", line 1934, in extract_multiplicatively
+    tmp = C.Mul(*newargs).extract_multiplicatively(c)
+  File "/usr/lib/pymodules/python2.6/sympy/core/basic.py", line 1934, in extract_multiplicatively
+    tmp = C.Mul(*newargs).extract_multiplicatively(c)
+  File "/usr/lib/pymodules/python2.6/sympy/core/basic.py", line 1934, in extract_multiplicatively
+    tmp = C.Mul(*newargs).extract_multiplicatively(c)
+  File "/usr/lib/pymodules/python2.6/sympy/core/basic.py", line 1934, in extract_multiplicatively
+    tmp = C.Mul(*newargs).extract_multiplicatively(c)
+  File "/usr/lib/pymodules/python2.6/sympy/core/basic.py", line 1934, in extract_multiplicatively
+    tmp = C.Mul(*newargs).extract_multiplicatively(c)
+  File "/usr/lib/pymodules/python2.6/sympy/core/basic.py", line 1934, in extract_multiplicatively
+    tmp = C.Mul(*newargs).extract_multiplicatively(c)
+  File "/usr/lib/pymodules/python2.6/sympy/core/basic.py", line 1934, in extract_multiplicatively
+    tmp = C.Mul(*newargs).extract_multiplicatively(c)
+  File "/usr/lib/pymodules/python2.6/sympy/core/basic.py", line 1934, in extract_multiplicatively
+    tmp = C.Mul(*newargs).extract_multiplicatively(c)
+  File "/usr/lib/pymodules/python2.6/sympy/core/basic.py", line 1879, in extract_multiplicatively
+    quotient = self / c
+  File "/usr/lib/pymodules/python2.6/sympy/core/decorators.py", line 78, in __sympifyit_wrapper
+    return func(a, b)
+  File "/usr/lib/pymodules/python2.6/sympy/core/basic.py", line 721, in __div__
+    return Mul(self, Pow(other, S.NegativeOne))
+  File "/usr/lib/pymodules/python2.6/sympy/core/cache.py", line 82, in wrapper
+    return func_cache_it_cache[k]
+  File "/usr/lib/pymodules/python2.6/sympy/core/basic.py", line 412, in __hash__
+    h = self._mhash
+KeyboardInterrupt
+[robot.cpp:901] default robot doesn't not support setting controllers (try GenericRobot)
+[kinbody.cpp:2000] destroying kinbody: er4u
+[environment-core.h:193] environment is already destroyed
+[plugindatabase.h:421] plugin database shutting down...
+[plugindatabase.h:101] RaveDatabase: closing plugin /usr/share/openrave-0.6/plugins/liboderave.so
+[plugindatabase.h:101] RaveDatabase: closing plugin /usr/share/openrave-0.6/plugins/libbasecontrollers.so
+[plugindatabase.h:101] RaveDatabase: closing plugin /usr/share/openrave-0.6/plugins/libikfastsolvers.so
+[plugindatabase.h:442] openrave plugin database destroyed
+

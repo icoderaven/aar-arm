@@ -1,0 +1,85 @@
+kshaurya@kshaurya-laptop:~/openrave/robots$ openrave.py --database inversekinematics --robot=er4u.xml --level=verbose --iktype=translationdirection5d
+[environment-core.h:43] setting openrave cache directory to /home/kshaurya/.openrave
+[environment-core.h:114] data dir: /home/kshaurya/openrave
+[environment-core.h:114] data dir: /usr/share/openrave-0.6
+[odecollision.h:119] ode will be slow in multi-threaded environments
+[environment-core.h:176] using ode collision checker
+[environment-core.h:770] setting ode collision checker
+[odespace.h:232] init ode collision environment
+[xmlreaders.cpp:296] unknown field render
+[xmlreaders.cpp:296] unknown field data
+[xmlreaders.cpp:296] unknown field render
+[xmlreaders.cpp:296] unknown field data
+[xmlreaders.cpp:296] unknown field render
+[xmlreaders.cpp:296] unknown field data
+[xmlreaders.cpp:296] unknown field render
+[xmlreaders.cpp:296] unknown field data
+[xmlreaders.cpp:296] unknown field render
+[xmlreaders.cpp:296] unknown field data
+[xmlreaders.cpp:296] unknown field render
+[xmlreaders.cpp:296] unknown field data
+[xmlreaders.cpp:296] unknown field render
+[xmlreaders.cpp:2422] : COM = (0.000000,0.085458,0.224875)
+[kinbody.cpp:3998] swapping link order of joint base(0)
+[kinbody.cpp:4310] _ComputeInternalInformation er4u in 0.000159s
+[robot.cpp:2474] no default controller set on robot er4u
+openravepy._openravepy_0_6.databases.inversekinematics: Generating inverse kinematics for manip gripper: TranslationDirection5D [0, 1, 2, 3, 4] (this might take up to 10 min)
+openravepy._openravepy_0_6.databases.inversekinematics: creating ik file /home/kshaurya/.openrave/kinematics.a15d5c8f77cca16b64487972de132f6b/ikfast55.TranslationDirection5D.0_1_2_3_4.cpp
+ikfast: moved translation [0, 0, 0] to right end
+ikfast: moved translation [0, 0, 261/2000] to left end
+ikfast: moved translation on intersecting axis [0, 0, 0] to left
+ikfast: [[1, 0, 0, 0],[0, 0, 1, 289/2000],[0, -1, 0, 0]]
+ikfast: [[cos(j0), -sin(j0), 0, 0],[sin(j0), cos(j0), 0, 0],[0, 0, 1, 0]]
+ikfast: [[0, 0, 1, 0],[1, 0, 0, -19/1000],[0, 1, 0, 0]]
+ikfast: [[cos(j1), -sin(j1), 0, 0],[sin(j1), cos(j1), 0, 0],[0, 0, 1, 0]]
+ikfast: [[1, 0, 0, -223/1000],[0, 1, 0, 0],[0, 0, 1, 0]]
+ikfast: [[cos(j2), -sin(j2), 0, 0],[sin(j2), cos(j2), 0, 0],[0, 0, 1, 0]]
+ikfast: [[1, 0, 0, -443/2000],[0, 1, 0, 0],[0, 0, 1, 0]]
+ikfast: [[cos(j3), -sin(j3), 0, 0],[sin(j3), cos(j3), 0, 0],[0, 0, 1, 0]]
+ikfast: [[0, 0, -1, 0],[0, 1, 0, 0],[1, 0, 0, 0]]
+ikfast: [[cos(j4), -sin(j4), 0, 0],[sin(j4), cos(j4), 0, 0],[0, 0, 1, 0]]
+ikfast: [[1, 0, 0, 0],[0, 1, 0, 0],[0, 0, 1, 0]]
+ikfast: ikfast translation direction 5d: [j0, j1, j2, j3, j4]
+ikfast: last 2 axes are intersecting
+ikfast: [] [j0, j1, j2]
+ikfast: [j0] [j1, j2]
+ikfast: [j0, j2] [j1]
+ikfast: j1 solution: equations used for atan2: [-pz - 223*sin(j1)/1000 - 443*cj2*sin(j1)/2000 - 443*sj2*cos(j1)/2000, -443*sj2/2000 + 19*sin(j1)/1000 - pz*cos(j1) + cj0*py*sin(j1) - px*sj0*sin(j1), -19/1000 - 223*cos(j1)/1000 + px*sj0 - cj0*py - 443*cj2*cos(j1)/2000 + 443*sj2*sin(j1)/2000, -223/1000 - 443*cj2/2000 - 19*cos(j1)/1000 - pz*sin(j1) + px*sj0*cos(j1) - cj0*py*cos(j1), -4111/4000000 - pp - 4237*cos(j1)/500000 - 223*pz*sin(j1)/500 - 19*cj0*py/500 + 19*px*sj0/500 - 223*cj0*py*cos(j1)/500 + 223*px*sj0*cos(j1)/500]
+ikfast: j1 solution: equations used for atan2: [-pz - 223*sin(j1)/1000 - 443*cj2*sin(j1)/2000 - 443*sj2*cos(j1)/2000, -443*sj2/2000 + 19*sin(j1)/1000 - pz*cos(j1) + cj0*py*sin(j1) - px*sj0*sin(j1), -19/1000 - 223*cos(j1)/1000 + px*sj0 - cj0*py - 443*cj2*cos(j1)/2000 + 443*sj2*sin(j1)/2000, -223/1000 - 443*cj2/2000 - 19*cos(j1)/1000 - pz*sin(j1) + px*sj0*cos(j1) - cj0*py*cos(j1), -4111/4000000 - pp - 4237*cos(j1)/500000 - 223*pz*sin(j1)/500 - 19*cj0*py/500 + 19*px*sj0/500 - 223*cj0*py*cos(j1)/500 + 223*px*sj0*cos(j1)/500]
+[environment-core.h:200] Environment destructor
+[environment-core.h:208] destroy module
+[environment-core.h:221] resetting raveviewer
+[odespace.h:239] destroying ode collision environment
+[environment-core.h:270] Environment destroyed
+[environment-core.h:193] environment is already destroyed
+Traceback (most recent call last):
+  File "/usr/bin/openrave.py", line 126, in <module>
+    database.run(args=args)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/databases/inversekinematics.py", line 890, in run
+    InverseKinematicsModel.RunFromParser(*args,**kwargs)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/databases/inversekinematics.py", line 866, in RunFromParser
+    model = DatabaseGenerator.RunFromParser(Model=Model,parser=parser,robotatts=robotatts,args=args,**kwargs)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/databases/__init__.py", line 219, in RunFromParser
+    model.autogenerate(options=options)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/databases/inversekinematics.py", line 493, in autogenerate
+    self.generate(iktype=iktype,freejoints=freejoints,precision=precision,forceikbuild=forceikbuild,outputlang=outputlang,ipython=ipython)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/databases/inversekinematics.py", line 684, in generate
+    chaintree = solver.generateIkSolver(baselink=baselink,eelink=eelink,freeindices=self.freeindices,solvefn=solvefn)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/ikfast.py", line 1662, in generateIkSolver
+    chaintree = solvefn(self, LinksRaw, jointvars, isolvejointvars)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/databases/inversekinematics.py", line 542, in solveFullIK_TranslationDirection5D
+    return self.ikfast.IKFastSolver.solveFullIK_TranslationDirection5D(*args,**kwargs)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/ikfast.py", line 2014, in solveFullIK_TranslationDirection5D
+    tree = self.solve5DIntersectingAxes(T0links,basepos,D,solvejointvars,endbranchtree)
+  File "/usr/lib/python2.6/dist-packages/openravepy/_openravepy_0_6/ikfast.py", line 2085, in solve5DIntersectingAxes
+    AllEquations = self.buildEquationsFromTwoSides([D],[T0[0:3,0:3]*self.Tee[0,0:3].transpose()],jointvars,uselength=False)
+NameError: global name 'jointvars' is not defined
+[robot.cpp:901] default robot doesn't not support setting controllers (try GenericRobot)
+[kinbody.cpp:2000] destroying kinbody: er4u
+[environment-core.h:193] environment is already destroyed
+[plugindatabase.h:421] plugin database shutting down...
+[plugindatabase.h:101] RaveDatabase: closing plugin /usr/share/openrave-0.6/plugins/liboderave.so
+[plugindatabase.h:101] RaveDatabase: closing plugin /usr/share/openrave-0.6/plugins/libbasecontrollers.so
+[plugindatabase.h:101] RaveDatabase: closing plugin /usr/share/openrave-0.6/plugins/libikfastsolvers.so
+[plugindatabase.h:442] openrave plugin database destroyed
+

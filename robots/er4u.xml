@@ -1,0 +1,185 @@
+<Robot name="er4u">
+    <KinBody>
+        <!-- Define Bodies -->
+        <Body name="base" type ="static"> <!-- Dynamic means movable within the enviroment -->
+            <Translation>0 0 0.01</Translation> <!-- To avoid self collision with ground -->
+            <Geom type="box"> <!-- The calculated geometry for collision will be a box -->
+                <render>models/er4u/base.wrl</render><!-- The object will be rendered as this .wrl file -->
+            </Geom>
+                <Mass type="box"> <!-- Mass distribution mimics a box -->
+                <com>0 -0.11 0</com> <!-- Center of mass calculated from Solidworks -->
+                <total>2</total><!-- Mass of 2 kg -->
+                </Mass>
+        </Body>
+        <Body name="body" type ="dynamic">
+            <offsetfrom>base</offsetfrom> <!-- References the base origin for translation and rotation -->
+            <Translation>0 .014 0</Translation><!-- Translates given X Y Z coordinates from base -->
+            <Geom type="trimesh"> <!-- Trimesh geometry takes the data from the .wrl file -->
+                <!-- <diffuseColor>1 1 1</diffuseColor>  Changes color to black 
+                <ambientColor>1 1 1</ambientColor> -->
+                <data>models/er4u/body.wrl</data>
+                <render>models/er4u/body.wrl</render>
+            </Geom>
+            <Mass type="box"> <!-- Mass distribution mimics a box -->
+                <total>.5</total>
+            </Mass>
+        </Body>
+        <!-- Assigning a revolute joint at the base -->
+        <Joint name="base" type="hinge">
+            <Body>base</Body>
+            <Body>body</Body>
+            <offsetfrom>body</offsetfrom>
+            <weight>4</weight>
+            <limitsdeg>-155 155</limitsdeg>
+            <axis>0 1 0</axis>
+            <maxvel>3</maxvel>
+            <resolution>1</resolution>
+        </Joint> 
+
+        <Body name="upper_arm" type ="dynamic">
+            <offsetfrom>base</offsetfrom> <!-- References the base origin for translation and rotation -->
+            <Translation>0 0.1445 0.019</Translation><!-- Translates given X Y Z coordinates from base -->
+            <Geom type="trimesh"> <!-- Trimesh geometry takes the data from the .wrl file -->
+                <data>models/er4u/upper_arm.wrl</data>
+                <render>models/er4u/upper_arm.wrl</render>
+            </Geom>
+            <Mass type="box"> <!-- Mass distribution mimics a box -->
+                <total>.5</total>
+                <com>0 0.16 0.12</com>
+            </Mass>
+        </Body>
+        <Joint name="shoulder" type="hinge">
+            <Body>body</Body>
+            <Body>upper_arm</Body>
+            <offsetfrom>upper_arm</offsetfrom>
+            <weight>4</weight>
+            <limitsdeg>-130 35</limitsdeg>
+            <axis>1 0 0</axis>
+            <maxvel>3</maxvel>
+            <resolution>1</resolution>
+        </Joint> 
+
+        <Body name="fore_arm" type ="dynamic">
+            <offsetfrom>base</offsetfrom> <!-- References the base origin for translation and rotation -->
+            <Translation>0 0.1445 0.242</Translation><!-- Translates given X Y Z coordinates from base -->
+            <Geom type="trimesh"> <!-- Trimesh geometry takes the data from the .wrl file -->
+                <data>models/er4u/fore_arm.wrl</data>
+                <render>models/er4u/fore_arm.wrl</render>
+            </Geom>
+            <Mass type="box"> <!-- Mass distribution mimics a box -->
+                <total>.5</total>
+                <com>0 0.015 0.41</com>
+            </Mass>
+        </Body>
+
+        <Joint name="elbow" type="hinge">
+            <Body>upper_arm</Body>
+            <Body>fore_arm</Body>
+            <offsetfrom>fore_arm</offsetfrom>
+            <weight>4</weight>
+            <limitsdeg>-130 130</limitsdeg>
+            <axis>1 0 0</axis>
+            <maxvel>3</maxvel>
+            <resolution>1</resolution>
+        </Joint> 
+
+        <Body name="wrist1" type ="dynamic">
+            <offsetfrom>base</offsetfrom> <!-- References the base origin for translation and rotation -->
+            <Translation>0 0.1445 0.4635</Translation><!-- Translates given X Y Z coordinates from base -->
+            <Geom type="trimesh"> <!-- Trimesh geometry takes the data from the .wrl file -->
+                <data>models/er4u/wrist.wrl</data>
+                <render>models/er4u/wrist.wrl</render>
+            </Geom>
+            <Mass type="box"> <!-- Mass distribution mimics a box -->
+                <total>.5</total>
+                <com>0 0.14 0.44</com>
+            </Mass>
+        </Body>
+        
+        <Body name="wrist2" type ="dynamic">
+            <offsetfrom>base</offsetfrom> <!-- References the base origin for translation and rotation -->
+            <Translation>0 0.1445 0.4635</Translation><!-- Translates given X Y Z coordinates from base -->
+        </Body>
+
+        <!-- Two joints for the wrist attachment - one about x, and the other about z -->
+        <Joint name="wrist1" type="hinge">
+            <Body>fore_arm</Body>
+            <Body>wrist1</Body>
+            <offsetfrom>wrist1</offsetfrom>
+            <weight>4</weight>
+            <limitsdeg>-130 130</limitsdeg>
+            <axis>1 0 0</axis>
+            <maxvel>3</maxvel>
+            <resolution>1</resolution>
+        </Joint> 
+
+        <!-- Two joints for the wrist attachment - one about x, and the other about z -->
+        <Joint name="wrist2" type="hinge">
+            <Body>wrist1</Body>
+            <Body>wrist2</Body>
+            <offsetfrom>wrist2</offsetfrom>
+            <weight>4</weight>
+            <limitsdeg>-180 180</limitsdeg>
+            <axis>0 0 1</axis>
+            <maxvel>3</maxvel>
+            <resolution>1</resolution>
+        </Joint> 
+
+        <Body name="gripperLeft" type ="dynamic">
+            <offsetfrom>base</offsetfrom> <!-- References the base origin for translation and rotation -->
+            <Translation>0 0.1445 0.4635</Translation><!-- Translates given X Y Z coordinates from base -->
+            <Geom modifiable="true" type="trimesh"> <!-- Trimesh geometry takes the data from the .wrl file -->
+                <data>models/er4u/gripper_left.wrl</data>
+                <render>models/er4u/gripper_left.wrl</render>
+            </Geom>
+            <Mass type="box"> <!-- Mass distribution mimics a box -->
+                <total>.5</total>
+            </Mass>
+        </Body>
+        <Body name="gripperRight" type ="dynamic">
+            <offsetfrom>base</offsetfrom> <!-- References the base origin for translation and rotation -->
+            <Translation>0 0.1445 0.4635</Translation><!-- Translates given X Y Z coordinates from base -->
+            <Geom modifiable="true" type="trimesh"> <!-- Trimesh geometry takes the data from the .wrl file -->
+                <data>models/er4u/gripper_right.wrl</data>
+                <render>models/er4u/gripper_right.wrl</render>
+            </Geom>
+            <Mass type="box"> <!-- Mass distribution mimics a box -->
+                <total>.5</total>
+            </Mass>
+        </Body>
+        <Joint name="gripperLeft" type="slider">
+            <Body>wrist2</Body>
+            <Body>gripperLeft</Body>
+            <offsetfrom>gripperLeft</offsetfrom>
+            <weight>.1</weight>
+            <axis>1 0 0</axis>
+            <maxvel>0.01</maxvel>
+            <limits>-0.008 0.02</limits>
+            <resolution>1</resolution>
+        </Joint> 
+        <Joint name="gripperRight" type="slider" mimic_pos="gripperLeft" mimic_vel="|gripperLeft">
+            <Body>wrist2</Body>
+            <Body>gripperRight</Body>
+            <offsetfrom>gripperRight</offsetfrom>
+            <axis>-1 0 0</axis>
+            <limits>-0.008 0.02</limits>
+            <!--<weight>.1</weight>
+            
+            <maxvel>0.01</maxvel>
+            <resolution>1</resolution> -->
+        </Joint> 
+        
+    </KinBody>
+
+
+        <Manipulator name="gripper">
+            <effector>wrist2</effector>   <!-- last link where end effector is attached-->
+            <base>base</base>           <!-- base link-->
+            <joints>gripperLeft </joints>      <!-- the gripper joints used for contact-->
+            <!-- joint values of the closed and opened positions-->
+            <closingdirection>-1 1</closingdirection>
+            <direction>0 1 0</direction><!-- specifying an axis for approaching objects or line-of-sight -->
+            <!-- grasp goal with respect to the effector-->
+            <Translation>0 0 0.083</Translation>
+        </Manipulator>
+</Robot>

@@ -1,0 +1,21 @@
+<robot>
+  <!-- add new first link -->
+  <kinbody>
+    <body name="root">
+    </body>
+  </kinbody>
+  <robot file="./er4u.xml"> 
+    <!-- change the coordinate system of the original first link and attach a dummy joint -->
+    <kinbody>
+      <body name="base">
+        <!-- Rotate by 90 deg about X so that it is now Z upwards instead of Y upwards -->
+        <rotationaxis>1 0 0 90</rotationaxis>
+      </body>
+      <joint name="dummy" type="hinge">
+        <body>root</body>
+        <body>base</body>
+        <limitsdeg>0 0</limitsdeg>
+      </joint>
+    </kinbody>
+  </robot>
+</robot>
