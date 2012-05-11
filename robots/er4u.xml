@@ -4,7 +4,7 @@
         <Body name="base" type ="static"> <!-- Dynamic means movable within the enviroment -->
             <Translation>0 0 0.01</Translation> <!-- To avoid self collision with ground -->
             <Geom type="box"> <!-- The calculated geometry for collision will be a box -->
-                <render>models/er4u/base.wrl</render><!-- The object will be rendered as this .wrl file -->
+                <render>./er4u/base.wrl</render><!-- The object will be rendered as this .wrl file -->
             </Geom>
                 <Mass type="box"> <!-- Mass distribution mimics a box -->
                 <com>0 -0.11 0</com> <!-- Center of mass calculated from Solidworks -->
@@ -17,8 +17,8 @@
             <Geom type="trimesh"> <!-- Trimesh geometry takes the data from the .wrl file -->
                 <!-- <diffuseColor>1 1 1</diffuseColor>  Changes color to black 
                 <ambientColor>1 1 1</ambientColor> -->
-                <data>models/er4u/body.wrl</data>
-                <render>models/er4u/body.wrl</render>
+                <data>./er4u/body.wrl</data>
+                <render>./er4u/body.wrl</render>
             </Geom>
             <Mass type="box"> <!-- Mass distribution mimics a box -->
                 <total>.5</total>
@@ -40,8 +40,8 @@
             <offsetfrom>base</offsetfrom> <!-- References the base origin for translation and rotation -->
             <Translation>0 0.1445 0.019</Translation><!-- Translates given X Y Z coordinates from base -->
             <Geom type="trimesh"> <!-- Trimesh geometry takes the data from the .wrl file -->
-                <data>models/er4u/upper_arm.wrl</data>
-                <render>models/er4u/upper_arm.wrl</render>
+                <data>./er4u/upper_arm.wrl</data>
+                <render>./er4u/upper_arm.wrl</render>
             </Geom>
             <Mass type="box"> <!-- Mass distribution mimics a box -->
                 <total>.5</total>
@@ -63,8 +63,8 @@
             <offsetfrom>base</offsetfrom> <!-- References the base origin for translation and rotation -->
             <Translation>0 0.1445 0.242</Translation><!-- Translates given X Y Z coordinates from base -->
             <Geom type="trimesh"> <!-- Trimesh geometry takes the data from the .wrl file -->
-                <data>models/er4u/fore_arm.wrl</data>
-                <render>models/er4u/fore_arm.wrl</render>
+                <data>./er4u/fore_arm.wrl</data>
+                <render>./er4u/fore_arm.wrl</render>
             </Geom>
             <Mass type="box"> <!-- Mass distribution mimics a box -->
                 <total>.5</total>
@@ -87,8 +87,8 @@
             <offsetfrom>base</offsetfrom> <!-- References the base origin for translation and rotation -->
             <Translation>0 0.1445 0.4635</Translation><!-- Translates given X Y Z coordinates from base -->
             <Geom type="trimesh"> <!-- Trimesh geometry takes the data from the .wrl file -->
-                <data>models/er4u/wrist.wrl</data>
-                <render>models/er4u/wrist.wrl</render>
+                <data>./er4u/wrist.wrl</data>
+                <render>./er4u/wrist.wrl</render>
             </Geom>
             <Mass type="box"> <!-- Mass distribution mimics a box -->
                 <total>.5</total>
@@ -129,8 +129,8 @@
             <offsetfrom>base</offsetfrom> <!-- References the base origin for translation and rotation -->
             <Translation>0 0.1445 0.4635</Translation><!-- Translates given X Y Z coordinates from base -->
             <Geom modifiable="true" type="trimesh"> <!-- Trimesh geometry takes the data from the .wrl file -->
-                <data>models/er4u/gripper_left.wrl</data>
-                <render>models/er4u/gripper_left.wrl</render>
+                <data>./er4u/gripper_left.wrl</data>
+                <render>./er4u/gripper_left.wrl</render>
             </Geom>
             <Mass type="box"> <!-- Mass distribution mimics a box -->
                 <total>.5</total>
@@ -140,8 +140,8 @@
             <offsetfrom>base</offsetfrom> <!-- References the base origin for translation and rotation -->
             <Translation>0 0.1445 0.4635</Translation><!-- Translates given X Y Z coordinates from base -->
             <Geom modifiable="true" type="trimesh"> <!-- Trimesh geometry takes the data from the .wrl file -->
-                <data>models/er4u/gripper_right.wrl</data>
-                <render>models/er4u/gripper_right.wrl</render>
+                <data>./er4u/gripper_right.wrl</data>
+                <render>./er4u/gripper_right.wrl</render>
             </Geom>
             <Mass type="box"> <!-- Mass distribution mimics a box -->
                 <total>.5</total>
