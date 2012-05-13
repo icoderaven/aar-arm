@@ -1,5 +1,5 @@
 <Robot name="er4u">
-    <KinBody>
+    <KinBody makejoinedlinksadjacent="true">
         <!-- Define Bodies -->
         <Body name="base" type ="static"> <!-- Dynamic means movable within the enviroment -->
             <Translation>0 0 0.01</Translation> <!-- To avoid self collision with ground -->
@@ -83,29 +83,35 @@
             <resolution>1</resolution>
         </Joint> 
 
-        <Body name="wrist1" type ="dynamic">
+        <Body name="wristX" type ="dynamic">
             <offsetfrom>base</offsetfrom> <!-- References the base origin for translation and rotation -->
             <Translation>0 0.1445 0.4635</Translation><!-- Translates given X Y Z coordinates from base -->
             <Geom type="trimesh"> <!-- Trimesh geometry takes the data from the .wrl file -->
-                <data>./er4u/wrist.wrl</data>
-                <render>./er4u/wrist.wrl</render>
+                <data>./er4u/wristX.wrl</data>
+                <render>./er4u/wristX.wrl</render>
             </Geom>
-            <Mass type="box"> <!-- Mass distribution mimics a box -->
-                <total>.5</total>
-                <com>0 0.14 0.44</com>
-            </Mass>
         </Body>
-        
-        <Body name="wrist2" type ="dynamic">
+        <!-- Virtual joint for wrist roll -->     
+        <Body name="wristZ" type ="dynamic">
             <offsetfrom>base</offsetfrom> <!-- References the base origin for translation and rotation -->
             <Translation>0 0.1445 0.4635</Translation><!-- Translates given X Y Z coordinates from base -->
+            <Geom type="trimesh"> <!-- Trimesh geometry takes the data from the .wrl file -->
+                <data>./er4u/wristZ.wrl</data>
+                <render>./er4u/wristZ.wrl</render>
+            </Geom>
+            
         </Body>
+        
+     
+   
+         <!-- Two joints for the wrist attachment - one about x, and the other about z -->
+        
 
         <!-- Two joints for the wrist attachment - one about x, and the other about z -->
-        <Joint name="wrist1" type="hinge">
-            <Body>fore_arm</Body>
-            <Body>wrist1</Body>
-            <offsetfrom>wrist1</offsetfrom>
+        <Joint name="wristX" type="hinge">
+            <Body>fore_Arm</Body>
+            <Body>wristX</Body>
+            <offsetfrom>wristX</offsetfrom>
             <weight>4</weight>
             <limitsdeg>-130 130</limitsdeg>
             <axis>1 0 0</axis>
@@ -113,11 +119,10 @@
             <resolution>1</resolution>
         </Joint> 
 
-        <!-- Two joints for the wrist attachment - one about x, and the other about z -->
-        <Joint name="wrist2" type="hinge">
-            <Body>wrist1</Body>
-            <Body>wrist2</Body>
-            <offsetfrom>wrist2</offsetfrom>
+       <Joint name="wristZ" type="hinge">
+            <Body>wristX</Body>
+            <Body>wristZ</Body>
+            <offsetfrom>wristZ</offsetfrom>
             <weight>4</weight>
             <limitsdeg>-180 180</limitsdeg>
             <axis>0 0 1</axis>
@@ -127,7 +132,7 @@
 
         <Body name="gripperLeft" type ="dynamic">
             <offsetfrom>base</offsetfrom> <!-- References the base origin for translation and rotation -->
-            <Translation>0 0.1445 0.4635</Translation><!-- Translates given X Y Z coordinates from base -->
+            <Translation>0.032 0.1445 0.538</Translation><!-- Translates given X Y Z coordinates from base -->
             <Geom modifiable="true" type="trimesh"> <!-- Trimesh geometry takes the data from the .wrl file -->
                 <data>./er4u/gripper_left.wrl</data>
                 <render>./er4u/gripper_left.wrl</render>
@@ -138,7 +143,7 @@
         </Body>
         <Body name="gripperRight" type ="dynamic">
             <offsetfrom>base</offsetfrom> <!-- References the base origin for translation and rotation -->
-            <Translation>0 0.1445 0.4635</Translation><!-- Translates given X Y Z coordinates from base -->
+            <Translation>-0.032 0.1445 0.538</Translation><!-- Translates given X Y Z coordinates from base -->
             <Geom modifiable="true" type="trimesh"> <!-- Trimesh geometry takes the data from the .wrl file -->
                 <data>./er4u/gripper_right.wrl</data>
                 <render>./er4u/gripper_right.wrl</render>
@@ -147,37 +152,39 @@
                 <total>.5</total>
             </Mass>
         </Body>
-        <Joint name="gripperLeft" type="slider">
-            <Body>wrist2</Body>
+        <Joint name="gripperLeft" type="hinge">
+            <Body>wristZ</Body>
             <Body>gripperLeft</Body>
             <offsetfrom>gripperLeft</offsetfrom>
             <weight>.1</weight>
-            <axis>1 0 0</axis>
+            <axis>0 1 0</axis>
             <maxvel>0.01</maxvel>
-            <limits>-0.008 0.02</limits>
+            <limits>0 0.5</limits> <!--max open length for the gripper is ~64cm with pads -->
             <resolution>1</resolution>
         </Joint> 
-        <Joint name="gripperRight" type="slider" mimic_pos="gripperLeft" mimic_vel="|gripperLeft">
-            <Body>wrist2</Body>
+        <Joint name="gripperRight" type="hinge" mimic_pos="gripperLeft" mimic_vel="|gripperLeft 1">
+            <Body>wristZ</Body>
             <Body>gripperRight</Body>
             <offsetfrom>gripperRight</offsetfrom>
-            <axis>-1 0 0</axis>
-            <limits>-0.008 0.02</limits>
-            <!--<weight>.1</weight>
+            <axis>0 -1 0</axis>
+            <!--<limits>-0.008 0.02</limits>
+            <weight>.1</weight>
             
             <maxvel>0.01</maxvel>
             <resolution>1</resolution> -->
         </Joint> 
         
+      
+        
     </KinBody>
 
 
         <Manipulator name="gripper">
-            <effector>wrist2</effector>   <!-- last link where end effector is attached-->
+            <effector>wristZ</effector>   <!-- last link where end effector is attached-->
             <base>base</base>           <!-- base link-->
-            <joints>gripperLeft </joints>      <!-- the gripper joints used for contact-->
+            <joints>gripperLeft</joints>      <!-- the gripper joints used for contact-->
             <!-- joint values of the closed and opened positions-->
-            <closingdirection>-1 1</closingdirection>
+            <closingdirection>1</closingdirection>
             <direction>0 1 0</direction><!-- specifying an axis for approaching objects or line-of-sight -->
             <!-- grasp goal with respect to the effector-->
             <Translation>0 0 0.083</Translation>
