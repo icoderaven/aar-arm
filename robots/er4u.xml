@@ -162,31 +162,26 @@
             <limits>0 0.5</limits> <!--max open length for the gripper is ~64cm with pads -->
             <resolution>1</resolution>
         </Joint> 
-        <Joint name="gripperRight" type="hinge" mimic_pos="gripperLeft" mimic_vel="|gripperLeft 1">
+        <Joint name="gripperRight" type="hinge" > <!--mimic_pos="gripperLeft" mimic_vel="|gripperLeft 1"-->
             <Body>wristZ</Body>
             <Body>gripperRight</Body>
             <offsetfrom>gripperRight</offsetfrom>
             <axis>0 -1 0</axis>
-            <!--<limits>-0.008 0.02</limits>
-            <weight>.1</weight>
-            
             <maxvel>0.01</maxvel>
-            <resolution>1</resolution> -->
+            <limits>0 0.5</limits> <!--max open length for the gripper is ~64cm with pads -->
+            <resolution>1</resolution>
         </Joint> 
-        
-      
+              
         
     </KinBody>
-
-
         <Manipulator name="gripper">
             <effector>wristZ</effector>   <!-- last link where end effector is attached-->
             <base>base</base>           <!-- base link-->
-            <joints>gripperLeft</joints>      <!-- the gripper joints used for contact-->
+            <joints>gripperLeft gripperRight</joints>      <!-- the gripper joints used for contact-->
             <!-- joint values of the closed and opened positions-->
-            <closingdirection>1</closingdirection>
+            <closingdirection>1 1</closingdirection>
             <direction>0 1 0</direction><!-- specifying an axis for approaching objects or line-of-sight -->
             <!-- grasp goal with respect to the effector-->
-            <Translation>0 0 0.143</Translation>
+            <Translation>0 0 0.123</Translation>
         </Manipulator>
 </Robot>
