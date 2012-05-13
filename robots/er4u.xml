@@ -187,6 +187,6 @@
             <closingdirection>1</closingdirection>
             <direction>0 1 0</direction><!-- specifying an axis for approaching objects or line-of-sight -->
             <!-- grasp goal with respect to the effector-->
-            <Translation>0 0 0.083</Translation>
+            <Translation>0 0 0.143</Translation>
         </Manipulator>
 </Robot>

@@ -19,7 +19,7 @@ if not ikmodel.load():
 
 with env: # lock the environment since robot will be used
     raveLogInfo("Robot "+robot.GetName()+" has "+repr(robot.GetDOF())+" joints with values:\\n"+repr(robot.GetDOFValues()))
-    robot.SetDOFValues([0.5,-0.5,0.5,0.5,0.5,0.1],[0,1,2,3,4,5])
+    robot.SetDOFValues([0.5,-0.5,0.5,0.5,0.5,0.5],[0,1,2,3,4,5])
     env.UpdatePublishedBodies()
     time.sleep(1)
     T = robot.GetLinks()[1].GetTransform() # get the transform of link 1
@@ -33,8 +33,8 @@ with env: # lock the environment since robot will be used
     traj = manipprob.MoveManipulator(goal=[0,0,0.2,0.5,0.03],execute=False, outputtrajobj=True)
     #Now try using inverse kinematics
     target=env.GetKinBody("cube")
-    destination_point=array([0.01,0.08,0.8])#
-    #destination_point = target.GetTransform()[0:3,3] #Extract only the translation vector from T
+    #destination_point=array([0.01,0.08,0.8])#
+    destination_point = target.GetTransform()[0:3,3]+[0,0,0.04] #Extract only the translation vector from T
 #    direction=array([0.0,0.0,0.0])  #Give it an approach direction, e.g. here Z axis
 #    direction /= linalg.norm(direction) #Normalize the direction
     raveLogInfo("\nThe target Transform is "+repr(destination_point))
