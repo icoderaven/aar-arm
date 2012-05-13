@@ -1,0 +1,8 @@
+<KinBody name="cube">
+    <Body name="cube_body">
+        <Geom type="box">
+            <Translation> 0 0 0.03 </Translation>
+            <extents>0.010 0.010 0.025</extents>
+        </Geom> 
+    </Body>
+</KinBody>
