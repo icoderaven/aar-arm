@@ -9,6 +9,7 @@ robot = env.GetRobots()[0] # get the first robot
 
 RaveSetDebugLevel(DebugLevel.Verbose) # set output level to debug
 manipprob = interfaces.BaseManipulation(robot) # create the interface for basic manipulation programs
+taskprob = interfaces.TaskManipulation(robot)
 manip = robot.GetActiveManipulator()
  
 ikmodel = databases.inversekinematics.InverseKinematicsModel(robot,iktype=IkParameterization.Type.TranslationDirection5D)
@@ -52,22 +53,25 @@ if not gmodel.load():
     print '\n\n\ngenerating grasping model (one time computation)\n\n'
     time.sleep(2)
     gmodel.init(friction=0.4,avoidlinks=[])
-    gmodel.generate(approachrays=gmodel.computeBoxApproachRays(delta=0.04,normalanglerange=0))
+    gmodel.numthreads = 3 # use three threads for computation 
+    gmodel.generate(approachrays=gmodel.computeBoxApproachRays(delta=0.004,normalanglerange=0),manipulatordirections=array([[0,0,1]]))
     gmodel.save()
 
 returnnum = 5
 
 print 'computing first %d valid grasps'%returnnum
-validgrasps,validindices = gmodel.computeValidGrasps(returnnum=returnnum)
+validgrasps,validindices = gmodel.computeValidGrasps(returnnum=returnnum, checkik=True)
 for validgrasp in validgrasps:
-    gmodel.showgrasp(validgrasp,useik=True,collisionfree=True,delay=5)
+    gmodel.showgrasp(validgrasp,collisionfree=True,useik=True, delay=5)
+    print '!'
     time.sleep(5)
 print validgrasps
-    
-    
+
 raveLogInfo("And on...")
 if traj is not None:
     robot.GetController().SetPath(traj)
     robot.WaitForController(0) # wait
+    taskprob.CloseFingers(execute=True)
+    robot.WaitForController(0)
 raveLogInfo("Ta!")
-time.sleep(3)
+time.sleep(5)
