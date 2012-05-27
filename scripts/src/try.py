@@ -48,25 +48,38 @@ else:
     RaveLogError("Couldn't find a solution!!!")
     
 #Trying out grasping now    
-gmodel = databases.grasping.GraspingModel(robot,target=target)
+#gmodel = databases.grasping.GraspingModel(robot,target=target)
+#if not gmodel.load():
+#    print '\n\n\ngenerating grasping model (one time computation)\n\n'
+#    time.sleep(2)
+#    gmodel.init(friction=0.4,avoidlinks=[])
+#    gmodel.numthreads = 3 # use three threads for computation 
+#    gmodel.generate(approachrays=gmodel.computeBoxApproachRays(delta=0.004,normalanglerange=0),manipulatordirections=array([[0,0,1]]))
+#    gmodel.save()
+#
+#returnnum = 5
+#
+#print 'computing first %d valid grasps'%returnnum
+#validgrasps,validindices = gmodel.computeValidGrasps(returnnum=returnnum, checkik=True)
+##for validgrasp in validgrasps:
+##    gmodel.showgrasp(validgrasp,collisionfree=True,useik=True, delay=5)
+##    print '!'
+##    time.sleep(5)
+##print validgrasps
+
+lmodel = databases.linkstatistics.LinkStatisticsModel(robot)
+if not lmodel.load():
+    lmodel.generate(0.004)
+    lmodel.setRobotWeights()
+    lmodel.setRobotResolutions(xyzdelta=0.005)
+    print 'robot resolutions: ',robot.GetDOFResolutions()
+    print 'robot weights: ',robot.GetDOFWeights()
+
+gmodel = databases.grasping.GraspingModel(robot=robot,target=target)
 if not gmodel.load():
-    print '\n\n\ngenerating grasping model (one time computation)\n\n'
-    time.sleep(2)
-    gmodel.init(friction=0.4,avoidlinks=[])
     gmodel.numthreads = 3 # use three threads for computation 
     gmodel.generate(approachrays=gmodel.computeBoxApproachRays(delta=0.004,normalanglerange=0),manipulatordirections=array([[0,0,1]]))
     gmodel.save()
-
-returnnum = 5
-
-print 'computing first %d valid grasps'%returnnum
-validgrasps,validindices = gmodel.computeValidGrasps(returnnum=returnnum, checkik=True)
-for validgrasp in validgrasps:
-    gmodel.showgrasp(validgrasp,collisionfree=True,useik=True, delay=5)
-    print '!'
-    time.sleep(5)
-print validgrasps
-
 raveLogInfo("And on...")
 if traj is not None:
     robot.GetController().SetPath(traj)
