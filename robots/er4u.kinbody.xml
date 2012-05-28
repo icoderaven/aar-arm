@@ -1,7 +1,10 @@
 <KinBody name="ER-4u" makejoinedlinksadjacent="true">
         <!-- Define Bodies -->
+    
         <Body name="base" type ="static"> <!-- Dynamic means movable within the enviroment -->
             <Translation>0 0 0.01</Translation> <!-- To avoid self collision with ground -->
+            <!-- Rotate by 90 deg about X so that it is now Z upwards instead of Y upwards -->
+            <rotationaxis>1 0 0 90</rotationaxis>
             <Geom type="box"> <!-- The calculated geometry for collision will be a box -->
                 <render>./er4u/base.wrl</render><!-- The object will be rendered as this .wrl file -->
             </Geom>

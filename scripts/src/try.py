@@ -7,9 +7,15 @@ env.Load('../../robots/er4u.env.xml') # load a simple scene
 time.sleep(0.5) #wait for things to intialize
 robot = env.GetRobots()[0] # get the first robot
 
+def waitrobot(robot=None):
+    """busy wait for robot completion"""
+    if robot is None:
+        print('Very funny.')
+    while not robot.GetController().IsDone():
+        time.sleep(0.01)
+
 RaveSetDebugLevel(DebugLevel.Verbose) # set output level to debug
 manipprob = interfaces.BaseManipulation(robot) # create the interface for basic manipulation programs
-taskprob = interfaces.TaskManipulation(robot)
 manip = robot.GetActiveManipulator()
  
 ikmodel = databases.inversekinematics.InverseKinematicsModel(robot,iktype=IkParameterization.Type.TranslationDirection5D)
@@ -80,11 +86,42 @@ if not gmodel.load():
     gmodel.numthreads = 3 # use three threads for computation 
     gmodel.generate(approachrays=gmodel.computeBoxApproachRays(delta=0.004,normalanglerange=0),manipulatordirections=array([[0,0,1]]))
     gmodel.save()
+    
+grasp_target = gmodel.target
+
+taskmanip = interfaces.TaskManipulation(robot,graspername=gmodel.grasper.plannername)
+minimumgoalpaths=1
+taskmanip.prob.SendCommand('SetMinimumGoalPaths %d'%minimumgoalpaths)
+taskmanip.GraspPlanning(gmodel=gmodel,grasps=gmodel.grasps[0:], approachoffset=0, seedgrasps = 3,seeddests=8,seedik=1,maxiter=1000)
+grasp = gmodel.grasps[0]
+Tglobalgrasp = gmodel.getGlobalGraspTransform(grasp,collisionfree=True)
+#manipprob.MoveToHandPosition(matrices=[Tglobalgrasp],maxiter=1000,maxtries=1,seedik=4)
+waitrobot(robot)
+
+taskmanip.CloseFingers(translationstepmult=gmodel.translationstepmult,finestep=gmodel.finestep)
+waitrobot(robot)
+
+with env:
+    robot.Grab(target)
+    try:
+        print 'move hand up'
+        manipprob.MoveHandStraight(direction=[0,0,1],stepsize=0.003,minsteps=1,maxsteps=60)
+    except:
+        print 'failed to move hand up'
+        #So now just move it, like really high into the air, for dramatic effect
+        solutions=ikmodel.manip.FindIKSolutions(IkParameterization(Ray(TEnd[0:3,3],[0,0,1]),IkParameterization.Type.TranslationDirection5D),IkFilterOptions.CheckEnvCollisions)
+        if solutions is not None and len(solutions)>0:
+            traj=manipprob.MoveManipulator(solutions[0],execute=False,outputtrajobj=True)
+            print 'Alright, move it!'
+        else:
+            print 'Couldn\'t move up!'
+            
 raveLogInfo("And on...")
 if traj is not None:
     robot.GetController().SetPath(traj)
     robot.WaitForController(0) # wait
-    taskprob.CloseFingers(execute=True)
-    robot.WaitForController(0)
+
 raveLogInfo("Ta!")
 time.sleep(5)
+
+
